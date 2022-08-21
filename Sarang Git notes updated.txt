@@ -216,3 +216,4 @@ mv .git/lost-found/commit/blob_object_id
 delete branch:
 git branch -d branch_name
 
+*******************************************************************************
