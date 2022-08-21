@@ -1,0 +1,218 @@
+Part 1 - basics 
+*********************************************************************************
+Link to Download git software : 
+https://github.com/git-for-windows/git/releases/download/v2.37.0.windows.1/Git-2.37.0-64-bit.exe
+
+Check Version :
+git --version
+
+initialize git : 
+git init
+
+*********************************************************************************
+
+configure git:
+git config --global user.name "sarang deodhar" 
+git config --global user.email "saranggdeodhar@gmail.com"
+
+local - project level folder (repository/.git/config)
+
+global - os user/admin (eg win - sarang user, guest user, friends user) (users/dell/.gitconfig)
+
+system - git installation folder
+
+to get detailed location :
+git config --list --show-origin
+
+*********************************************************************************
+
+create new file:
+touch file_name
+
+*********************************************************************************
+
+to add file in file system to platform/staging area (tracking):
+git add file_name
+git add *			(* is specially for shell command, upload all files except
+git add *.file_Extention		hidden files and deleted files).
+git add -u			(upload deleted and modified but not untracked file)
+git add . 			(. represent current directory)
+git add -A			(-A uploads everything in entire working tree)
+git add --no-all		(ignore updating the list for deleted files)
+
+To understand difference between all the types of add tecnhique go through following link:
+https://www.youtube.com/watch?v=tcd4txbTtAY - Corey Schafer
+
+Note:- use add -A or -u for better efficiency.
+
+*********************************************************************************
+
+to check the list of files in staging area:
+git status
+
+to remove file from staging area (non-tracking the file):
+git rm --cached file_name
+
+to commit the file from staging area to repo:
+git commit -m "any comment"
+
+*********************************************************************************
+
+to check the work we done on last branch:
+git show
+
+to check the work till now:
+gitk
+
+*********************************************************************************
+
+to list the content from the directory
+ls *		(wont work for deleted files or hidden files).
+
+*********************************************************************************
+
+clear screen:
+clear
+
+*********************************************************************************
+
+Q.how to ignore files
+=> add file name to .ignore file
+
+for more study on git follow the link:
+https://git-scm.com/docs
+
+complete list of all commands:
+https://git-scm.com/docs/git#_git_commands
+
+******************************************************************************************************************************************************************
+
+Part 2 - remote
+*********************************************************************************To create branch:
+git branch new_branch_name
+
+Note:- never jump from one branch to another branch without commiting your work.
+
+*********************************************************************************
+
+switch to another branch:
+git checkout branch_name
+
+*********************************************************************************
+
+add remote repository:
+git remote add origin "https://github.com/sarang98/sample"
+
+if url goes wrong
+git remote set-url origin URL
+
+*********************************************************************************
+
+check the remote repository:
+git remote
+
+*********************************************************************************
+
+push git-committed-data to github:
+git push -u origin master
+
+*********************************************************************************
+
+download data from new link:
+git clone URL
+
+download data from connected repo. (already set-up remote)
+1) in current branch
+git pull
+2) in another branch
+git pull origin master (origin - remote branch & master - local branch)
+
+download data using fetch
+git fetch URL
+or
+git fetch origin master
+
+to check fetch data
+git branch -a
+
+*********************************************************************************
+
+copy the data from another branch:
+1) go the brach where u want to copy data and then type the following command-
+git merge another_branch
+
+*********************************************************************************
+
+Part 3 - branches
+*********************************************************************************
+
+list branches:
+git branch
+
+*********************************************************************************
+
+change name of branch:
+1) current branch
+git branch -m new_name
+
+2) other branch
+git branch -m old_name new_name
+
+after changing name of the branch, update it into github:
+git push origin : old_name new_name
+
+*********************************************************************************
+
+Part 4 - restore
+*********************************************************************************
+
+to get the list of commits: (branch is optional if desired log is in current branch)
+1) basic
+git log branch_name
+
+2) in one line
+git log branch_name --oneline 
+
+3) detailed
+git log branch_name --stat 
+
+*********************************************************************************
+
+to see all the changes/commits we have done till now:
+git reflog
+
+*********************************************************************************
+
+to get the HEAD reset to old commit:
+git reset --hard commit_code
+
+*********************************************************************************
+
+to get the dangling blob:
+git fsck 			(fsck - file system check)
+
+output :- here we get the blob ids
+
+to check the data inside the blob id:
+git show blob_id
+
+to get the blob list in file:
+git fsck --lost-found
+
+to check if the file generated:
+ls .git/lost-found			(here you find the file which contains the bolb ids)
+
+to see the list of blob in that file:
+ls .git/lost-found/commit	     (in my case the file name was commit, u may have other)
+
+to list the content in any of those specific blob file
+cat .git/lost-found/commit/blob_object_id  (here we got the list of the files in that object)
+
+to get the above file:
+mv .git/lost-found/commit/blob_object_id 
+
+*********************************************************************************
+
+delete branch:
+git branch -d branch_name
+
